@@ -19,13 +19,18 @@ import {
   ShieldCheck,
   Calendar,
   Zap,
-  Box,
-  Truck
+  MessageSquare,
+  Box
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const PHONE_NUMBER = "(604) 555-0192";
-const TEL_LINK = "tel:6045550192";
+const PHONE_NUMBER = "(778) 955-0605";
+const TEL_LINK = "tel:7789550605";
+const SMS_LINK = `sms:7789550605?body=${encodeURIComponent("Number of bins:\nAddress:\nTime:\nAdditional Info:")}`;
+
+const Logo = ({ className = "" }: { className?: string }) => (
+  <img src="/logo.png" alt="Burnaby Bin Cleaners Logo" className={`object-contain ${className}`} />
+);
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,16 +54,15 @@ export default function App() {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="bg-primary-green p-2 rounded-xl group-hover:bg-accent-green transition-colors relative z-10 overflow-hidden">
-                <Trash2 className="w-6 h-6 text-white relative z-10" />
-                {/* Integrated White Stars */}
-                <Star className="absolute top-1 right-1 w-2.5 h-2.5 text-white fill-white z-20" />
-                <Star className="absolute bottom-1 left-1.5 w-2 h-2 text-white fill-white z-20" />
-              </div>
-              <div className="absolute inset-0 bg-accent-green/20 blur-lg rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Logo className="w-12 h-12 text-primary-green group-hover:text-accent-green transition-all duration-300 shadow-lg shadow-primary-green/20" />
+            <div className="flex flex-col">
+              <span className="font-poppins font-bold text-xl md:text-2xl tracking-tight leading-none text-primary-green group-hover:text-accent-green transition-colors">
+                BURNABY BIN
+              </span>
+              <span className="font-poppins font-bold text-xs uppercase tracking-[0.2em] text-medium-text/60 leading-none mt-1">
+                CLEANERS
+              </span>
             </div>
-            <span className="font-poppins font-bold text-xl md:text-2xl text-primary-green tracking-tight">PureCart</span>
           </a>
 
           {/* Desktop Nav */}
@@ -75,21 +79,21 @@ export default function App() {
               ))}
             </nav>
             <a 
-              href={TEL_LINK}
+              href={SMS_LINK}
               className="bg-primary-green hover:bg-accent-green text-white px-5 py-2.5 rounded-full font-poppins font-bold flex items-center gap-2 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary-green/20"
             >
-              <Phone className="w-4 h-4" />
-              {PHONE_NUMBER}
+              <MessageSquare className="w-4 h-4" />
+              BOOK NOW
             </a>
           </div>
 
           {/* Mobile Toggle */}
           <div className="lg:hidden flex items-center gap-4">
             <a 
-              href={TEL_LINK}
+              href={SMS_LINK}
               className="bg-primary-green text-white p-2.5 rounded-full shadow-lg"
             >
-              <Phone className="w-5 h-5" />
+              <MessageSquare className="w-5 h-5" />
             </a>
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -122,11 +126,11 @@ export default function App() {
               <div className="pt-4 border-t border-border-green">
                 <p className="text-muted-text text-sm mb-3 px-4 font-medium uppercase tracking-wider">Book Now</p>
                 <a 
-                  href={TEL_LINK}
+                  href={SMS_LINK}
                   className="w-full bg-primary-green text-white py-4 rounded-xl font-poppins font-bold text-center flex items-center justify-center gap-3 shadow-lg"
                 >
-                  <Phone className="w-5 h-5" />
-                  {PHONE_NUMBER}
+                  <MessageSquare className="w-5 h-5" />
+                  TEXT TO BOOK
                 </a>
               </div>
             </motion.div>
@@ -161,7 +165,7 @@ export default function App() {
               transition={{ delay: 0.1 }}
               className="text-medium-text text-lg md:text-xl mb-10 leading-relaxed max-w-lg"
             >
-              Professional garbage can cleaning for homes and businesses. Sanitised, deodorised, and looking brand new — right on your driveway.
+              Hardworking high schoolers providing professional garbage can cleaning for local homes. Sanitised, deodorised, and looking brand new — right on your driveway.
             </motion.p>
             
             <motion.div 
@@ -171,11 +175,11 @@ export default function App() {
               className="flex flex-col sm:flex-row gap-4 mb-10"
             >
               <a 
-                href={TEL_LINK}
+                href={SMS_LINK}
                 className="bg-primary-green hover:bg-accent-green text-white px-8 py-5 rounded-2xl font-poppins font-bold text-lg flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95 shadow-xl shadow-primary-green/20"
               >
-                <Phone className="w-5 h-5" />
-                CALL TO BOOK: {PHONE_NUMBER}
+                <MessageSquare className="w-5 h-5" />
+                TEXT TO BOOK: {PHONE_NUMBER}
               </a>
             </motion.div>
 
@@ -318,7 +322,7 @@ export default function App() {
           <div className="inline-block bg-white px-8 py-4 rounded-2xl shadow-subtle font-poppins text-lg">
             <span className="text-muted-text">Average household: clean 0 times/year.</span>
             <span className="mx-4 text-border-green">|</span>
-            <span className="text-primary-green font-bold">PureCart customer: 12 times.</span>
+            <span className="text-primary-green font-bold">Burnaby Bin Cleaners customer: 12 times.</span>
           </div>
         </div>
       </section>
@@ -334,7 +338,7 @@ export default function App() {
             <div className="hidden md:block absolute top-1/4 left-1/3 right-1/3 h-px border-t-2 border-dashed border-border-green -z-10" />
             
             {[
-              { step: 1, icon: Phone, title: "Call Us", desc: "Give us a call, tell us how many bins you have and pick a day that works for you." },
+              { step: 1, icon: MessageSquare, title: "Text Us", desc: "Text us your info (using our preset template) and tell us how many bins you have." },
               { step: 2, icon: Calendar, title: "We Come To You", desc: "Our team arrives at your property on your chosen day. No need to be home." },
               { step: 3, icon: Star, title: "Spotless Bins", desc: "We clean, sanitise and deodorise every bin. You don't lift a finger." }
             ].map((step, idx) => (
@@ -354,11 +358,11 @@ export default function App() {
           </div>
           <div className="mt-20 text-center">
             <a 
-              href={TEL_LINK}
+              href={SMS_LINK}
               className="inline-flex items-center gap-3 bg-primary-green hover:bg-accent-green text-white px-10 py-5 rounded-2xl font-poppins font-bold text-xl shadow-xl shadow-primary-green/20 transition-all active:scale-95"
             >
-              <Phone className="w-6 h-6" />
-              CALL NOW: {PHONE_NUMBER}
+              <MessageSquare className="w-6 h-6" />
+              TEXT TO BOOK: {PHONE_NUMBER}
             </a>
           </div>
         </div>
@@ -369,7 +373,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-16">
           <h2 className="font-poppins font-bold text-3xl md:text-5xl text-dark-text mb-4">Everything your bins need.</h2>
         </div>
-        <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-8 mb-16">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 mb-16">
           {/* Residential */}
           <div className="bg-white rounded-[2rem] shadow-xl border-t-8 border-primary-green overflow-hidden flex flex-col">
             <div className="p-10 flex-grow">
@@ -377,60 +381,28 @@ export default function App() {
                 <div className="w-14 h-14 bg-light-green rounded-2xl flex items-center justify-center text-primary-green">
                   <Box className="w-8 h-8" />
                 </div>
-                <h3 className="font-poppins font-bold text-3xl text-dark-text uppercase tracking-tight">Residential</h3>
+                <h3 className="font-poppins font-bold text-3xl text-dark-text uppercase tracking-tight">Residential Bin Cleaning</h3>
               </div>
-              <p className="text-medium-text text-lg mb-8">For homeowners and families. We clean your wheelie bins, recycling bins and organic waste containers.</p>
-              <ul className="space-y-4 mb-10">
+              <p className="text-medium-text text-lg mb-8">Professional cleaning for homeowners and families. We clean your wheelie bins, recycling bins and organic waste containers right at your curb.</p>
+              <div className="grid md:grid-cols-2 gap-x-12 gap-y-4 mb-10">
                 {[
-                  "High-pressure hot wash",
+                  "High-pressure pressure wash",
                   "Eco-friendly sanitiser",
                   "Deodorising treatment",
                   "Inside and outside clean",
-                  "Bin returned to your spot"
+                  "Bin returned to your spot",
+                  "No-mess guarantee"
                 ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-medium-text">
+                  <div key={item} className="flex items-center gap-3 text-medium-text">
                     <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
                     <span className="font-medium">{item}</span>
-                  </li>
+                  </div>
                 ))}
-              </ul>
-            </div>
-            <div className="p-10 pt-0">
-              <a href={TEL_LINK} className="block w-full bg-primary-green hover:bg-accent-green text-white py-5 rounded-2xl font-poppins font-bold text-center transition-colors text-lg shadow-lg">
-                BOOK RESIDENTIAL
-              </a>
-            </div>
-          </div>
-
-          {/* Commercial */}
-          <div className="bg-white rounded-[2rem] shadow-xl border-t-8 border-accent-green overflow-hidden flex flex-col">
-            <div className="p-10 flex-grow">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-14 h-14 bg-light-green rounded-2xl flex items-center justify-center text-accent-green">
-                  <Truck className="w-8 h-8" />
-                </div>
-                <h3 className="font-poppins font-bold text-3xl text-dark-text uppercase tracking-tight">Commercial</h3>
               </div>
-              <p className="text-medium-text text-lg mb-8">For businesses, restaurants, offices and strata properties. Fleet pricing available for multiple bins and locations.</p>
-              <ul className="space-y-4 mb-10">
-                {[
-                  "High-pressure hot wash",
-                  "Eco-friendly sanitiser",
-                  "Deodorising treatment",
-                  "Inside and outside clean",
-                  "Scheduled service plans",
-                  "Invoice billing available"
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-3 text-medium-text">
-                    <CheckCircle2 className="w-6 h-6 text-accent-green flex-shrink-0" />
-                    <span className="font-medium">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
             <div className="p-10 pt-0">
-              <a href={TEL_LINK} className="block w-full border-2 border-accent-green text-accent-green hover:bg-accent-green hover:text-white py-5 rounded-2xl font-poppins font-bold text-center transition-all text-lg font-bold">
-                BOOK COMMERCIAL
+              <a href={SMS_LINK} className="block w-full bg-primary-green hover:bg-accent-green text-white py-5 rounded-2xl font-poppins font-bold text-center transition-colors text-lg shadow-lg">
+                TEXT TO BOOK: {PHONE_NUMBER}
               </a>
             </div>
           </div>
@@ -455,7 +427,7 @@ export default function App() {
                 ))}
               </div>
               <p className="text-center text-medium-text text-lg max-w-3xl mx-auto leading-relaxed italic">
-                "Our truck-mounted system uses 95°C pressurised water and biodegradable cleaning agents — safe for your family, your pets, and the environment."
+                Our high-powered pressure washing system uses eco-friendly cleaning agents — safe for your family, your pets, and the environment.
               </p>
            </div>
         </div>
@@ -469,9 +441,9 @@ export default function App() {
         </div>
         <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-3 gap-8">
           {[
-            { title: "1 BIN", price: "$29", features: ["All bin types", "Full service", "One-time or recurring"] },
-            { title: "2 BINS", price: "$49", features: ["All bin types", "Full service", "One-time or recurring", "Most requested"], recommended: true },
-            { title: "3+ BINS", price: "?", features: ["Best value", "Fleet pricing", "Business rates", "Multiple locations"], quote: true }
+            { title: "1 BIN", price: "$10", features: ["All bin types", "Full service", "Eco-friendly sanitiser"] },
+            { title: "2 BINS", price: "$15", features: ["All bin types", "Full service", "Eco-friendly sanitiser", "Most requested"], recommended: true },
+            { title: "3+ BINS", price: "$7", suffix: "per bin", features: ["Best value", "Custom quotes", "Neighborhood rates", "Multiple containers"] }
           ].map((plan) => (
             <div 
               key={plan.title}
@@ -487,14 +459,8 @@ export default function App() {
               )}
               <h3 className="font-poppins font-bold text-2xl text-dark-text mb-8 text-center">{plan.title}</h3>
               <div className="mb-10 text-center">
-                {plan.quote ? (
-                  <div className="text-3xl font-poppins font-bold text-primary-green">Call for quote</div>
-                ) : (
-                  <>
-                    <span className="text-5xl font-poppins font-bold text-primary-green">{plan.price}</span>
-                    <span className="text-muted-text ml-2">/ clean</span>
-                  </>
-                )}
+                <span className="text-5xl font-poppins font-bold text-primary-green">{plan.price}</span>
+                {plan.suffix && <span className="text-muted-text ml-2">{plan.suffix}</span>}
               </div>
               <ul className="space-y-4 mb-10 flex-grow">
                 {plan.features.map(f => (
@@ -505,37 +471,34 @@ export default function App() {
                 ))}
               </ul>
               <a 
-                href={TEL_LINK}
+                href={SMS_LINK}
                 className={`w-full py-5 rounded-2xl font-poppins font-bold text-center transition-all ${
                   plan.recommended 
                     ? 'bg-primary-green text-white hover:bg-accent-green shadow-xl shadow-primary-green/20' 
                     : 'bg-light-green text-primary-green hover:bg-primary-green hover:text-white'
                 }`}
               >
-                {plan.quote ? 'CALL US' : 'BOOK NOW'}
+                {plan.suffix ? 'TEXT US' : 'TEXT TO BOOK'}
               </a>
             </div>
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <p className="inline-flex items-center gap-2 text-medium-text font-medium bg-light-green px-6 py-3 rounded-full">
-            <Zap className="w-5 h-5 text-accent-green" />
-            Recurring monthly service? Ask about our loyalty discount.
-          </p>
+        <div className="mt-12 text-center text-medium-text font-medium bg-light-green px-6 py-3 rounded-full inline-block">
+          Need a special quote? Text us for custom neighborhood rates.
         </div>
       </section>
 
       {/* Trust Section */}
       <section className="py-24 bg-light-green">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-16">
-          <h2 className="font-poppins font-bold text-3xl md:text-5xl text-primary-green mb-4">Why homeowners choose PureCart.</h2>
+          <h2 className="font-poppins font-bold text-3xl md:text-5xl text-primary-green mb-4">Why homeowners choose Burnaby Bin Cleaners.</h2>
         </div>
         <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-2 lg:grid-cols-5 gap-6">
           {[
             { icon: Leaf, title: "Eco-Safe Chemicals", desc: "Biodegradable, pet and child safe" },
-            { icon: Droplets, title: "Self-Contained Truck", desc: "No mess left behind — waste disposed properly" },
-            { icon: Calendar, title: "Flexible Scheduling", desc: "Weekly, monthly or one-time" },
-            { icon: ShieldCheck, title: "Fully Insured", desc: "Fully licensed, bonded and insured" },
+            { icon: Droplets, title: "Professional Setup", desc: "We use high-power pressure washers for a deep clean" },
+            { icon: Calendar, title: "Flexible Scheduling", desc: "After school and weekend slots available" },
+            { icon: ShieldCheck, title: "Fully Insured", desc: "Professionally backed for your peace of mind" },
             { icon: Zap, title: "Same-Day Available", desc: "Need it done fast? We've got you covered" }
           ].map((item) => (
             <div key={item.title} className="bg-white p-8 rounded-3xl text-center flex flex-col items-center shadow-subtle hover:shadow-xl transition-all h-full">
@@ -549,54 +512,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 text-center mb-16">
-          <h2 className="font-poppins font-bold text-3xl md:text-5xl text-dark-text mb-4">What our customers are saying.</h2>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-3 gap-8">
-          {[
-            { stars: 5, text: "I had no idea how disgusting my bins were until I saw them after PureCart were done. Genuinely couldn't believe it.", author: "Sarah M.", location: "Burnaby" },
-            { stars: 5, text: "The team arrived on time, didn't need me home, and left the bins looking and smelling incredible. Worth every penny.", author: "David K.", location: "Vancouver" },
-            { stars: 5, text: "As a restaurant owner, bin hygiene is critical. PureCart has been our monthly service for a year. Wouldn't use anyone else.", author: "Tony R.", location: "Surrey" }
-          ].map((item) => (
-            <div key={item.author} className="bg-white border border-border-green p-10 rounded-[2.5rem] shadow-subtle relative hover:shadow-2xl transition-all">
-              <div className="flex gap-1 mb-6">
-                {[...Array(item.stars)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-accent-green text-accent-green" />
-                ))}
-              </div>
-              <p className="text-medium-text text-lg italic mb-8 leading-relaxed">"{item.text}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-light-green rounded-full flex items-center justify-center text-primary-green font-bold">
-                  {item.author[0]}
-                </div>
-                <div>
-                  <div className="font-poppins font-bold text-dark-text">— {item.author}</div>
-                  <div className="text-muted-text text-sm">{item.location}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-16 text-center">
-            <a 
-              href={TEL_LINK}
-              className="inline-flex items-center gap-3 text-primary-green hover:text-accent-green font-poppins font-bold text-lg transition-all group"
-            >
-              <Phone className="w-5 h-5" />
-              JOIN HUNDREDS OF HAPPY CUSTOMERS: {PHONE_NUMBER}
-              <motion.span 
-                animate={{ x: [0, 5, 0] }} 
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="inline-block"
-              >
-                →
-              </motion.span>
-            </a>
-          </div>
-      </section>
-
       {/* FAQ Accordion */}
       <section id="faq" className="py-24 bg-light-green">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
@@ -605,13 +520,11 @@ export default function App() {
           </div>
           <div className="space-y-4">
             {[
+              { q: "Who runs Burnaby Bin Cleaners?", a: "We are a team of hardworking local high school students! We started this business to learn about entrepreneurship while providing a valuable service to our neighbours in Burnaby." },
               { q: "Do I need to be home for the clean?", a: "No. As long as your bins are accessible, we'll take care of everything and return them exactly where we found them." },
-              { q: "What do you use to clean the bins?", a: "We use a high-pressure hot water system with biodegradable, eco-friendly cleaning agents — safe for children, pets, and the environment." },
-              { q: "How long does it take?", a: "Each bin takes approximately 5–10 minutes. Most residential cleans are completed in under 20 minutes." },
-              { q: "What happens to the wastewater?", a: "Our truck is fully self-contained. All wastewater is collected and disposed of responsibly — we never leave mess behind." },
-              { q: "How often should I have my bins cleaned?", a: "We recommend monthly for most households. If you have young children or pets, more frequent cleans may be beneficial." },
-              { q: "Do you offer recurring services?", a: "Yes. We offer weekly, fortnightly, and monthly recurring plans with a loyalty discount for ongoing customers." },
-              { q: "What areas do you cover?", a: "We currently serve the Greater Vancouver area and surrounding regions. Give us a call to check availability in your specific area." }
+              { q: "What do you use to clean the bins?", a: "We use professional-grade high-pressure washers combined with biodegradable, eco-friendly cleaning agents. It's tough on grime but safe for children and pets." },
+              { q: "How long does it take?", a: "Each bin takes approximately 10–15 minutes. Most residential cleans are completed in under 30 minutes." },
+              { q: "What happens to the wastewater?", a: "We take care to ensure all residue is cleaned up and disposed of properly. We won't leave a mess on your driveway." }
             ].map((item) => (
               <FaqItem key={item.q} question={item.q} answer={item.a} />
             ))}
@@ -625,7 +538,7 @@ export default function App() {
           <Box className="absolute top-10 left-10 w-32 h-32 text-white/20 rotate-12" />
           <Trash2 className="absolute bottom-10 right-10 w-48 h-48 text-white/20 -rotate-12" />
         </div>
-        <div className="max-w-4xl mx-auto relative cursor-pointer" onClick={() => window.location.href = TEL_LINK}>
+        <div className="max-w-4xl mx-auto relative cursor-pointer" onClick={() => window.location.href = SMS_LINK}>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -633,17 +546,16 @@ export default function App() {
             className="bg-white/10 backdrop-blur-md rounded-[3rem] p-12 md:p-20 border border-white/20 hover:bg-white/20 transition-all group lg:hover:scale-105 active:scale-95 duration-500"
           >
             <h2 className="font-poppins font-bold text-4xl md:text-6xl text-white mb-8">Ready for cleaner bins?</h2>
-            <p className="text-white/80 text-xl md:text-2xl mb-12 font-medium">Give us a call. We'll handle the rest.</p>
+            <p className="text-white/80 text-xl md:text-2xl mb-12 font-medium">Send us a text. We'll handle the rest.</p>
             <div className="font-poppins font-bold text-4xl md:text-7xl text-white mb-12 tracking-tight group-hover:scale-110 transition-transform">
-              <span className="inline-block mr-4">📞</span>
               {PHONE_NUMBER}
             </div>
             <div className="text-white/70 text-lg mb-12 font-medium tracking-wide">
-              Monday – Saturday  ·  7:00am – 6:00pm
+              Working Hours: Monday - Friday 4:30pm - 7:30pm
             </div>
             <div className="inline-flex items-center gap-3 bg-white text-primary-green px-12 py-5 rounded-full font-poppins font-bold text-2xl shadow-2xl transition-all group-hover:shadow-white/20">
-              <Phone className="w-8 h-8" />
-              TAP TO CALL
+              <MessageSquare className="w-8 h-8" />
+              TAP TO TEXT
             </div>
           </motion.div>
         </div>
@@ -654,24 +566,19 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
             <div className="flex items-center gap-4">
-              <div className="relative">
-                <div className="bg-white/10 p-3 rounded-2xl border border-white/20 relative overflow-hidden">
-                  <Trash2 className="w-10 h-10 text-accent-green relative z-10" />
-                  {/* Integrated White Stars for Footer Logo */}
-                  <Star className="absolute top-2 right-2 w-4 h-4 text-white fill-white z-20" />
-                  <Star className="absolute bottom-2 left-2 w-3.5 h-3.5 text-white fill-white z-20" />
-                </div>
-              </div>
+              <Logo className="w-16 h-16 text-accent-green" />
               <div className="text-left">
-                <span className="font-poppins font-bold text-3xl block leading-none">PureCart</span>
-                <span className="text-accent-green/80 text-sm font-medium uppercase tracking-widest">Professional Bin Cleaning</span>
+                <div className="flex flex-col">
+                  <span className="font-poppins font-bold text-2xl md:text-3xl leading-none">BURNABY BIN</span>
+                  <span className="text-accent-green text-sm font-bold uppercase tracking-[0.3em] mt-1">CLEANERS</span>
+                </div>
               </div>
             </div>
             <div className="text-center md:text-right">
-              <a href={TEL_LINK} className="font-poppins font-bold text-2xl hover:text-accent-green transition-colors block mb-1">
+              <a href={SMS_LINK} className="font-poppins font-bold text-2xl hover:text-accent-green transition-colors block mb-1">
                 {PHONE_NUMBER}
               </a>
-              <p className="text-white/60 font-medium">Mon–Sat · 7am–6pm</p>
+              <p className="text-white/60 font-medium">Working Hours: Mon–Fri 4:30pm–7:30pm</p>
             </div>
           </div>
           
@@ -692,7 +599,7 @@ export default function App() {
           <div className="h-px bg-white/10 mb-12" />
           
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/50 text-sm font-medium">
-            <p>© 2026 PureCart. All rights reserved.</p>
+            <p>© 2026 Burnaby Bin Cleaners. All rights reserved.</p>
             <p>Serving Vancouver, Burnaby, Richmond, Surrey and surrounding areas.</p>
           </div>
         </div>
